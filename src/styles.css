@@ -1,0 +1,148 @@
+/* CRM Cortez — folha de estilos única, simples de manter */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --primaria: #1f6f5c;
+  --primaria-escura: #17503f;
+  --fundo: #f4f6f5;
+  --borda: #dde3e0;
+  --texto: #1d2925;
+  --texto-suave: #63736d;
+  --branco: #ffffff;
+  --erro: #b3372f;
+  --ok: #2e7d32;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  font-size: 14px;
+}
+
+/* ---------- layout ---------- */
+.layout { display: flex; min-height: 100vh; }
+.sidebar {
+  width: 220px; background: var(--primaria-escura); color: #fff;
+  display: flex; flex-direction: column; padding: 16px; gap: 16px;
+  position: sticky; top: 0; height: 100vh;
+}
+.logo { font-size: 18px; padding-bottom: 8px; }
+.sidebar nav { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+.sidebar nav a {
+  color: #d7e5e0; text-decoration: none; padding: 8px 10px; border-radius: 6px;
+}
+.sidebar nav a:hover { background: rgba(255,255,255,.08); }
+.sidebar nav a.active { background: var(--primaria); color: #fff; }
+.sidebar-rodape { display: flex; flex-direction: column; gap: 8px; }
+.usuario { display: flex; flex-direction: column; font-size: 13px; }
+.usuario span { color: #a9c0b8; }
+.conteudo { flex: 1; padding: 24px; max-width: 1300px; }
+
+.tela-centro {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  background: var(--fundo); padding: 16px;
+}
+
+/* ---------- componentes ---------- */
+.card {
+  background: var(--branco); border: 1px solid var(--borda);
+  border-radius: 10px; padding: 16px;
+}
+.card + .card { margin-top: 16px; }
+.card h2, .card h3 { margin-bottom: 12px; }
+
+.btn {
+  background: var(--primaria); color: #fff; border: none; border-radius: 6px;
+  padding: 8px 14px; cursor: pointer; font-size: 14px;
+}
+.btn:hover { background: var(--primaria-escura); }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn-secundario { background: transparent; border: 1px solid var(--borda); color: inherit; }
+.btn-secundario:hover { background: rgba(0,0,0,.05); }
+.btn-perigo { background: var(--erro); }
+.btn-mini { padding: 4px 8px; font-size: 12px; }
+
+input, select, textarea {
+  width: 100%; padding: 8px 10px; border: 1px solid var(--borda);
+  border-radius: 6px; font-size: 14px; background: #fff; color: inherit;
+}
+textarea { resize: vertical; min-height: 70px; }
+label { display: block; font-size: 12px; color: var(--texto-suave); margin-bottom: 4px; }
+.campo { margin-bottom: 12px; }
+
+.linha { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; }
+.linha > * { flex: 1; min-width: 140px; }
+
+.erro { color: var(--erro); margin: 8px 0; }
+.sucesso { color: var(--ok); margin: 8px 0; }
+.suave { color: var(--texto-suave); }
+
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--borda); }
+th { font-size: 12px; text-transform: uppercase; color: var(--texto-suave); }
+tr:hover td { background: #fafcfb; }
+
+.tag {
+  display: inline-block; padding: 2px 8px; border-radius: 10px;
+  font-size: 12px; background: #e5efec; color: var(--primaria-escura);
+}
+.tag.vendido { background: #e0f0e1; color: var(--ok); }
+.tag.perdido { background: #f6e2e0; color: var(--erro); }
+
+/* ---------- dashboard ---------- */
+.cards-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px; margin-bottom: 16px;
+}
+.card-numero { background: #fff; border: 1px solid var(--borda); border-radius: 10px; padding: 14px; }
+.card-numero .valor { font-size: 24px; font-weight: 700; margin-top: 4px; }
+.card-numero .rotulo { font-size: 12px; color: var(--texto-suave); text-transform: uppercase; }
+
+/* ---------- kanban ---------- */
+.kanban { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 12px; }
+.kanban-coluna {
+  background: #eceff0; border-radius: 10px; padding: 10px;
+  min-width: 240px; width: 240px; flex-shrink: 0;
+}
+.kanban-coluna h4 { margin-bottom: 8px; font-size: 13px; }
+.kanban-card {
+  background: #fff; border: 1px solid var(--borda); border-radius: 8px;
+  padding: 10px; margin-bottom: 8px; cursor: grab; font-size: 13px;
+}
+.kanban-card a { color: var(--primaria-escura); text-decoration: none; font-weight: 600; }
+.kanban-card .suave { font-size: 12px; }
+
+/* ---------- chat ---------- */
+.chat { display: flex; gap: 12px; height: calc(100vh - 130px); }
+.chat-lista { width: 280px; overflow-y: auto; }
+.chat-lista .conversa {
+  padding: 10px; border-radius: 8px; cursor: pointer; border: 1px solid transparent;
+}
+.chat-lista .conversa:hover { background: #eef3f1; }
+.chat-lista .conversa.ativa { background: #e2ece8; border-color: var(--borda); }
+.chat-janela { flex: 1; display: flex; flex-direction: column; }
+.chat-mensagens { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 6px; }
+.balao {
+  max-width: 70%; padding: 8px 12px; border-radius: 12px; font-size: 14px;
+  white-space: pre-wrap; word-break: break-word;
+}
+.balao.recebida { background: #fff; border: 1px solid var(--borda); align-self: flex-start; }
+.balao.enviada { background: #d8ecdf; align-self: flex-end; }
+.balao .meta { display: block; font-size: 11px; color: var(--texto-suave); margin-top: 2px; }
+.chat-envio { display: flex; gap: 8px; padding-top: 8px; }
+.chat-envio textarea { min-height: 44px; }
+
+/* ---------- auth ---------- */
+.auth-card { width: 100%; max-width: 380px; }
+.auth-card h1 { margin-bottom: 4px; }
+.auth-card p { margin-bottom: 16px; color: var(--texto-suave); }
+.auth-card a { color: var(--primaria); }
+
+/* ---------- abas ---------- */
+.abas { display: flex; gap: 4px; margin-bottom: 16px; flex-wrap: wrap; }
+.abas button {
+  background: transparent; border: 1px solid var(--borda); border-radius: 6px;
+  padding: 6px 12px; cursor: pointer; font-size: 13px;
+}
+.abas button.ativa { background: var(--primaria); color: #fff; border-color: var(--primaria); }
